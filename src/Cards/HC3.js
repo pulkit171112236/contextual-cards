@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
 import useLongPress from "./useLongPress";
 
 const getFormattedTitle = (obj) => null;
 const getFormattedDescription = (obj) => null;
 const HC3 = (props) => {
+  const [vis, setVis] = useState(true);
+  const handleRemindLater = () => {
+    console.log("remind");
+    setVis(false);
+  };
+  const handleDismiss = () => {
+    console.log("dismiss");
+    setVis(false);
+  };
+  if (!vis) return <div></div>;
   return cards.is_scrollable ? (
     <Carousel
       classname="row"
@@ -14,19 +24,31 @@ const HC3 = (props) => {
       itemPadding={[10]}
     >
       {cards.cards.map((item) => (
-        <Item card={item} />
+        <Item
+          card={item}
+          handleRemindLater={handleRemindLater}
+          handleDismiss={handleDismiss}
+        />
       ))}
     </Carousel>
   ) : (
-    <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
+    <div
+      style={vis ? {} : { display: "none" }}
+      className="flex-gap row"
+      style={{ display: "flex", margin: "10px 0" }}
+    >
       {cards.cards.map((item) => (
-        <Item card={item} />
+        <Item
+          card={item}
+          handleRemindLater={handleRemindLater}
+          handleDismiss={handleDismiss}
+        />
       ))}
     </div>
   );
 };
 const Item = (props) => {
-  const { card } = props;
+  const { card, handleDismiss, handleRemindLater } = props;
   const [width, setWidth] = useState("100%");
   const [visPanel, setVisPanel] = useState(false);
   const bgStyle = {
@@ -48,7 +70,11 @@ const Item = (props) => {
       style={{ display: "flex" }}
       {...useLongPress(handleActionButton)}
     >
-      <ActionPanel visPanel={visPanel} />
+      <ActionPanel
+        visPanel={visPanel}
+        handleRemindLater={handleRemindLater}
+        handleDismiss={handleDismiss}
+      />
       <div className="hc3 container" style={bgStyle}>
         <Title title={card.title} formatted_title={card.formatted_title} />
         <Description
@@ -94,16 +120,16 @@ const ActionButton = (props) => {
 };
 
 const ActionPanel = (props) => {
-  const { visPanel } = props;
+  const { visPanel, handleRemindLater, handleDismiss } = props;
   return (
     <div
       className="left action-panel"
       style={visPanel ? {} : { display: "none" }}
     >
-      <div className="btn-container">
-        <button className="btn">Remind Later</button>
+      <div className="btn-container" onClick={handleRemindLater}>
+        <button className="btn">Remind Later </button>
       </div>
-      <div className="btn-container">
+      <div className="btn-container" onClick={handleDismiss}>
         <button className="btn">Dissmiss</button>
       </div>
     </div>
@@ -156,5 +182,5 @@ const cards = {
       ],
     },
   ],
-  is_scrollable: false,
+  is_scrollable: true,
 };

@@ -25,7 +25,7 @@ const HC9 = (props) => {
 const Item = (props) => {
   const { card } = props;
   const redirect = () => {
-    window.location = card.url;
+    if (card.url) window.location = card.url;
   };
   const bgStyle = {
     backgroundImage: urlProp(card.bg_image.image_url),
