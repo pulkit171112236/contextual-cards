@@ -13,11 +13,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.row {
+  margin: 5px auto;
+}
 .container {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border-radius: 12px;
-  margin-top: 10px;
 }
 .icon > img {
   width: 100%;
@@ -82,7 +84,10 @@ code {
 .hc6 > .right {
   display: grid;
 }
-
+.hc5.container {
+  min-height: 100px;
+  width: 100%;
+}
 /* hc9 */
 .hc9.box {
   display: flex;
@@ -100,4 +105,12 @@ code {
 
 .hc1 > .title {
   margin: auto 10px;
+}
+
+.flex-gap > div {
+  margin: 0 5px;
+}
+
+div {
+  /* border: solid 1px; */
 }

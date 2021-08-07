@@ -1,20 +1,42 @@
 import React from "react";
-// import Cards from "../Cards";
-
+import Carousel from "react-elastic-carousel";
 const getFormattedTitle = () => null;
 const getFormattedDescription = () => null;
 const handleAction = () => null;
 const handleInnerBtn = () => null;
 const HC5 = (props) => {
-  const card = cards.cards[0];
-  return <Item card={card} />;
+  return cards.is_scrollable ? (
+    <Carousel
+      classname="row"
+      itemsToShow={1}
+      pagination={false}
+      showArrows={false}
+      itemPadding={[10]}
+    >
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </Carousel>
+  ) : (
+    <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </div>
+  );
 };
 const Item = (props) => {
   const { card } = props;
+  const cardHeight = 320 / card.bg_image.aspect_ratio;
   const bgStyle = {
     backgroundImage: `url(${card.bg_image.image_url})`,
+    height: cardHeight,
   };
-  return <div className="hc5 container" style={bgStyle}></div>;
+  return (
+    <div className="hc5 container" style={bgStyle}>
+      erfej
+    </div>
+  );
 };
 
 export default HC5;

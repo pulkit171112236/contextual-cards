@@ -1,12 +1,29 @@
 import React from "react";
-// import Cards from "../Cards";
+import Carousel from "react-elastic-carousel";
 
 const getFormattedTitle = (obj) => null;
 const getFormattedDescription = (obj) => null;
 const handleActionButton = () => null;
 const HC3 = (props) => {
-  const card = cards.cards[0];
-  return <Item card={card} />;
+  return cards.is_scrollable ? (
+    <Carousel
+      classname="row"
+      itemsToShow={1}
+      pagination={false}
+      showArrows={false}
+      itemPadding={[10]}
+    >
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </Carousel>
+  ) : (
+    <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </div>
+  );
 };
 const Item = (props) => {
   const { card } = props;
@@ -95,5 +112,5 @@ const cards = {
       ],
     },
   ],
-  is_scrollable: false,
+  is_scrollable: true,
 };

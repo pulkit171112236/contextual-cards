@@ -1,9 +1,26 @@
 import React from "react";
-
+import Carousel from "react-elastic-carousel";
 const getFormattedTitle = () => null;
 const HC1 = () => {
-  const card = cards.cards[0];
-  return <Item card={card} />;
+  return cards.is_scrollable ? (
+    <Carousel
+      classname="row"
+      itemsToShow={1}
+      pagination={false}
+      showArrows={false}
+      itemPadding={[10]}
+    >
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </Carousel>
+  ) : (
+    <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
+      {cards.cards.map((item) => (
+        <Item card={item} />
+      ))}
+    </div>
+  );
 };
 const Item = (props) => {
   const { card } = props;
