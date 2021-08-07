@@ -24,11 +24,16 @@ const HC9 = (props) => {
 
 const Item = (props) => {
   const { card } = props;
+  const redirect = () => {
+    window.location = card.url;
+  };
   const bgStyle = {
     backgroundImage: urlProp(card.bg_image.image_url),
     width: "100%",
   };
-  return <div style={bgStyle} className="hc9 container"></div>;
+  return (
+    <div onClick={redirect} style={bgStyle} className="hc9 container"></div>
+  );
 };
 
 export default HC9;

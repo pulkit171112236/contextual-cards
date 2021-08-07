@@ -40,6 +40,10 @@ code {
   line-height: 18px;
 }
 /* hc3 */
+.hc3.wrapper {
+  display: flex;
+  width: 100%;
+}
 .hc3.container {
   height: 350px;
   display: inline-block;
@@ -57,17 +61,32 @@ code {
 }
 
 .hc3 > .action-btn-container {
-  margin: 29px 159px 20px 33px;
-  background: #000000;
+  margin: auto 10%;
+  margin-top: 10%;
   border-radius: 6px;
-}
-.action-btn {
-  margin-left: auto;
-  background-color: transparent;
-  border: transparent;
-  color: white;
+  min-width: 30%;
+  width: fit-content;
+  padding: 5px;
 }
 
+.action-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.action-panel > .btn-container {
+  border-radius: 15px;
+  background-color: #f1cb56;
+  margin: 10% auto;
+  width: 50%;
+  height: 20%;
+}
+.action-panel > .btn-container > button {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
 /* hc6 */
 .hc6.container {
   height: 60px;
@@ -99,6 +118,8 @@ code {
 /* hc1 */
 .hc1.container {
   display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
   padding: 5px;
   height: 60px;
 }
@@ -111,6 +132,10 @@ code {
   margin: 0 5px;
 }
 
-div {
-  /* border: solid 1px; */
+button {
+  background: none;
+  border: none;
+}
+.btn-container:focus {
+  width: 110%;
 }

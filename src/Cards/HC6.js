@@ -28,9 +28,11 @@ const HC6 = (props) => {
 };
 const Item = (props) => {
   const { card } = props;
-
+  const redirect = () => {
+    window.location = card.url;
+  };
   return (
-    <div className="hc6 container">
+    <div className="hc6 container" onClick={redirect}>
       <Icon icon={card.icon} />
       <div className="right">
         <Title title={card.title} formatted_title={card.formatted_title} />
@@ -44,6 +46,7 @@ const Item = (props) => {
 };
 const Icon = (props) => {
   const { icon } = props;
+
   return (
     <div className="icon">
       <img src={icon.image_url} alt={icon.image_type} className="icon"></img>

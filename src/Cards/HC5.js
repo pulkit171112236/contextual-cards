@@ -32,10 +32,11 @@ const Item = (props) => {
     backgroundImage: `url(${card.bg_image.image_url})`,
     height: cardHeight,
   };
+  const redirect = () => {
+    window.location = card.url;
+  };
   return (
-    <div className="hc5 container" style={bgStyle}>
-      erfej
-    </div>
+    <div className="hc5 container" onClick={redirect} style={bgStyle}></div>
   );
 };
 

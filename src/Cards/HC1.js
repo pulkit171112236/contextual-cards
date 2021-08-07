@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "react-elastic-carousel";
+
 const getFormattedTitle = () => null;
 const HC1 = () => {
   return cards.is_scrollable ? (
@@ -24,8 +25,15 @@ const HC1 = () => {
 };
 const Item = (props) => {
   const { card } = props;
+  const redirect = () => {
+    window.location = card.url;
+  };
   return (
-    <div className="hc1 container" style={{ backgroundColor: card.bg_color }}>
+    <div
+      className="hc1 container"
+      onClick={redirect}
+      style={{ backgroundColor: card.bg_color }}
+    >
       <Icon icon={card.icon} />
       <Title title={card.title} formatted_title={card.formatted_title} />
     </div>

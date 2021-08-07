@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
+import useLongPress from "./useLongPress";
 
 const getFormattedTitle = (obj) => null;
 const getFormattedDescription = (obj) => null;
-const handleActionButton = () => null;
 const HC3 = (props) => {
   return cards.is_scrollable ? (
     <Carousel
@@ -27,17 +27,36 @@ const HC3 = (props) => {
 };
 const Item = (props) => {
   const { card } = props;
+  const [width, setWidth] = useState("100%");
+  const [visPanel, setVisPanel] = useState(false);
   const bgStyle = {
     backgroundImage: `url(${card.bg_image.image_url})`,
+    width,
+  };
+  const handleActionButton = () => {
+    if (visPanel) {
+      setVisPanel(false);
+      setWidth("100%");
+    } else {
+      setVisPanel(true);
+      setWidth("50%");
+    }
   };
   return (
-    <div className="hc3 container" style={bgStyle}>
-      <Title title={card.title} formatted_title={card.formatted_title} />
-      <Description
-        description={card.description}
-        formatted_description={card.formatted_description}
-      />
-      <ActionButton handleActionButton={handleActionButton} />
+    <div
+      className="hc3 wrapper"
+      style={{ display: "flex" }}
+      {...useLongPress(handleActionButton)}
+    >
+      <ActionPanel visPanel={visPanel} />
+      <div className="hc3 container" style={bgStyle}>
+        <Title title={card.title} formatted_title={card.formatted_title} />
+        <Description
+          description={card.description}
+          formatted_description={card.formatted_description}
+        />
+        <ActionButton cta={card.cta[0]} />
+      </div>
     </div>
   );
 };
@@ -56,12 +75,37 @@ const Description = (props) => {
   );
 };
 const ActionButton = (props) => {
-  const { handleActionButton } = props;
+  const { text, bg_color, text_color, url } = props.cta;
+  const handleActionButton = props.handleActionButton;
+  const redirect = (e, cta) => {
+    window.location = url;
+  };
   return (
-    <div className="action-btn-container" style={{}}>
-      <button className="action-btn" onClick={handleActionButton}>
-        Action
+    <div
+      className="action-btn-container"
+      style={{ backgroundColor: bg_color }}
+      onClick={redirect}
+    >
+      <button style={{ color: text_color }} className="action-btn">
+        {text}
       </button>
+    </div>
+  );
+};
+
+const ActionPanel = (props) => {
+  const { visPanel } = props;
+  return (
+    <div
+      className="left action-panel"
+      style={visPanel ? {} : { display: "none" }}
+    >
+      <div className="btn-container">
+        <button className="btn">Remind Later</button>
+      </div>
+      <div className="btn-container">
+        <button className="btn">Dissmiss</button>
+      </div>
     </div>
   );
 };
@@ -112,5 +156,5 @@ const cards = {
       ],
     },
   ],
-  is_scrollable: true,
+  is_scrollable: false,
 };
