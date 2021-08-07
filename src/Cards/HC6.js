@@ -3,9 +3,8 @@ import Carousel from "react-elastic-carousel";
 
 const getFormattedTitle = () => null;
 const getFormattedDescription = () => null;
-const handleAction = () => null;
-const handleInnerBtn = () => null;
 const HC6 = (props) => {
+  const { cards } = props;
   return cards.is_scrollable ? (
     <Carousel
       classname="row"
@@ -14,14 +13,14 @@ const HC6 = (props) => {
       showArrows={false}
       itemPadding={[10]}
     >
-      {cards.cards.map((item) => (
-        <Item card={item} />
+      {cards.cards.map((item, i) => (
+        <Item card={item} key={i} />
       ))}
     </Carousel>
   ) : (
     <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
-      {cards.cards.map((item) => (
-        <Item card={item} />
+      {cards.cards.map((item, i) => (
+        <Item card={item} key={i} />
       ))}
     </div>
   );
@@ -68,41 +67,3 @@ const Description = (props) => {
   );
 };
 export default HC6;
-
-const cards = {
-  id: 31,
-  name: "UPI Register HCG",
-  design_type: "HC6",
-  cards: [
-    {
-      name: "UPI Register card",
-      title: "Setup your UPI ID",
-      formatted_title: {
-        text: "Setup your {}",
-        entities: [
-          {
-            text: "UPI ID",
-            color: "#FF0000",
-          },
-        ],
-      },
-      description: "Register now and start UPI payments",
-      formatted_description: {
-        text: "Register now and start {}",
-        entities: [
-          {
-            text: "UPI payments",
-            color: "#00FF00",
-          },
-        ],
-      },
-      icon: {
-        image_type: "ext",
-        image_url:
-          "https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/128x128/plain/shape_square.png",
-      },
-      url: "https://youtube.com/",
-    },
-  ],
-  is_scrollable: true,
-};

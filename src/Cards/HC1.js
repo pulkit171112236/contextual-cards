@@ -2,7 +2,8 @@ import React from "react";
 import Carousel from "react-elastic-carousel";
 
 const getFormattedTitle = () => null;
-const HC1 = () => {
+const HC1 = (props) => {
+  const { cards } = props;
   return cards.is_scrollable ? (
     <Carousel
       classname="row"
@@ -11,14 +12,14 @@ const HC1 = () => {
       showArrows={false}
       itemPadding={[10]}
     >
-      {cards.cards.map((item) => (
-        <Item card={item} />
+      {cards.cards.map((item, i) => (
+        <Item card={item} key={i} />
       ))}
     </Carousel>
   ) : (
     <div className="flex-gap row" style={{ display: "flex", margin: "10px 0" }}>
-      {cards.cards.map((item) => (
-        <Item card={item} />
+      {cards.cards.map((item, i) => (
+        <Item card={item} key={i} />
       ))}
     </div>
   );
@@ -55,43 +56,3 @@ const Title = (props) => {
   );
 };
 export default HC1;
-
-const cards = {
-  id: 7,
-  name: "All transactions",
-  design_type: "HC1",
-  cards: [
-    {
-      name: "View all txn",
-      title: "Transactions",
-      formatted_title: {
-        text: "Transactions",
-        entities: [],
-      },
-      icon: {
-        image_type: "ext",
-        image_url:
-          "https://westeros-staging.s3.amazonaws.com/media/images/generic/4ce76db9e755497f8d176764b6d590ba.png",
-        aspect_ratio: 1,
-      },
-      url: "https://google.com/",
-      bg_color: "red",
-    },
-    {
-      name: "Rewards",
-      title: "Rewards",
-      formatted_title: {
-        text: "Rewards",
-        entities: [],
-      },
-      icon: {
-        image_type: "ext",
-        image_url:
-          "https://westeros-staging.s3.amazonaws.com/media/images/generic/aa7354aad52243728066169761045344.png",
-        aspect_ratio: 1,
-      },
-      url: "https://youtube.com/",
-    },
-  ],
-  is_scrollable: false,
-};

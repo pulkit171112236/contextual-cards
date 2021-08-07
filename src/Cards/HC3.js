@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
 import useLongPress from "./useLongPress";
 
 const getFormattedTitle = (obj) => null;
 const getFormattedDescription = (obj) => null;
 const HC3 = (props) => {
+  const { cards } = props;
   const [vis, setVis] = useState(true);
   const handleRemindLater = () => {
     console.log("remind");
@@ -23,25 +24,23 @@ const HC3 = (props) => {
       showArrows={false}
       itemPadding={[10]}
     >
-      {cards.cards.map((item) => (
+      {cards.cards.map((item, i) => (
         <Item
           card={item}
           handleRemindLater={handleRemindLater}
           handleDismiss={handleDismiss}
+          key={i}
         />
       ))}
     </Carousel>
   ) : (
-    <div
-      style={vis ? {} : { display: "none" }}
-      className="flex-gap row"
-      style={{ display: "flex", margin: "10px 0" }}
-    >
-      {cards.cards.map((item) => (
+    <div style={vis ? {} : { display: "none" }} className="flex-gap row">
+      {cards.cards.map((item, i) => (
         <Item
           card={item}
           handleRemindLater={handleRemindLater}
           handleDismiss={handleDismiss}
+          key={i}
         />
       ))}
     </div>
@@ -102,7 +101,6 @@ const Description = (props) => {
 };
 const ActionButton = (props) => {
   const { text, bg_color, text_color, url } = props.cta;
-  const handleActionButton = props.handleActionButton;
   const redirect = (e, cta) => {
     window.location = url;
   };
@@ -137,50 +135,3 @@ const ActionPanel = (props) => {
 };
 
 export default HC3;
-
-const cards = {
-  id: 4,
-  name: "Add money",
-  design_type: "HC3",
-  cards: [
-    {
-      name: "Add money",
-      title: "Your account looks empty!",
-      formatted_title: {
-        text: "Your {} looks {}!",
-        entities: [
-          {
-            text: "Account",
-            color: "#FFFF00",
-          },
-          {
-            text: "empty",
-            color: "#FF0000",
-          },
-        ],
-      },
-      description: "Add some money to your account to get started.",
-      formatted_description: {
-        text: "Add some money to your account to get started.",
-        entities: [],
-      },
-      url: "https://facebook.com/",
-      bg_image: {
-        image_type: "ext",
-        image_url:
-          "https://westeros-staging.s3.amazonaws.com/media/images/generic/5e97239d1bd747878828852d4f397361.png",
-        aspect_ratio: 0.9142857,
-      },
-      bg_color: "#FFB486",
-      cta: [
-        {
-          text: "Add",
-          bg_color: "#000000",
-          text_color: "#FFFFFF",
-          url: "https://instagram.com/",
-        },
-      ],
-    },
-  ],
-  is_scrollable: true,
-};
